@@ -1,0 +1,21 @@
+@import "src/assets/styles/theming";
+
+:host {
+
+    .nav-bar-wrapper {
+        @include flexWrapper(row, space-around, normal);
+        background-color: $main-color;
+        width: 45vw;
+
+        .tab {
+            @include flexWrapper(row, space-around, normal);
+            width: 100%;
+            padding: 15px;
+
+            &:hover {
+                cursor: pointer;
+                background-color: $main-color-hover;
+            }
+        }
+    }
+}

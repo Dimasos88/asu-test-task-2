@@ -1,0 +1,29 @@
+@import 'src/assets/styles/theming';
+
+:host {
+
+    .component-wrapper {
+        @include flexWrapper(column, space-around, normal);
+        height: 100%;
+        width: 40vw;
+
+        .component {
+            @include flexWrapper(column, space-around, normal);
+            max-height: 6vh;
+            max-width: 100%;
+
+            .title {
+                margin-bottom: 1vh;
+            }
+
+            .button-wrapper {
+                @include flexWrapper(row, flex-end, normal);
+                width: 100%;
+
+                .dx-button {
+                    width: 70%;
+                }
+            }
+        }
+    }
+}

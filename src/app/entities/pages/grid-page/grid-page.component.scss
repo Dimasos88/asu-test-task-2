@@ -1,0 +1,16 @@
+@import "src/assets/styles/theming";
+
+:host {
+    @include flexWrapper(column, space-between, normal);
+
+    .grid-wrapper {
+        @include flexWrapper(column, space-between, normal);
+        width: 70vw;
+        border: solid 2px rgba(189, 189, 189, 0.76);
+        margin: 3vh auto;
+
+        ::ng-deep .abilities {
+            white-space: normal;
+        }
+    }
+}

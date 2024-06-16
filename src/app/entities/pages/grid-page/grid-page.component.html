@@ -1,0 +1,40 @@
+<div class="grid-wrapper">
+    <dx-data-grid [dataSource]="heroesData$ | async"
+                  [keyExpr]="LInquiryHero.ID"
+                  [showBorders]="true"
+                  [showRowLines]="true"
+                  [focusedRowEnabled]="true"
+                  [allowColumnResizing]="true">
+        <dxi-column [dataField]="LInquiryHero.NAME"
+                    [width]="300"
+                    caption="Имя героя"/>
+        <dxi-column [dataField]="LInquiryHero.POWER"
+                    [width]="100"
+                    caption="Сила"/>
+        <dxi-column dataField="Abilities"
+                    caption="Способности"
+                    cellTemplate="ability-cell">
+            <div *dxTemplate="let cell of 'ability-cell'"
+                 class="abilities">
+                {{ cell.data[LInquiryHero.ABILITIES] | interfaceTransform : heroSkillData }}
+            </div>
+        </dxi-column>
+        <dxi-column [dataField]="LInquiryHero.HERO_LEVEL"
+                    [width]="90"
+                    caption="Уровень"/>
+        <dxi-column [width]="130"
+                    dataField="Redact"
+                    caption="Редактировать"
+                    alignment="center"
+                    cellTemplate="popup-cell">
+            <div *dxTemplate="let cell of 'popup-cell'">
+                <dx-button (onClick)="openPopup(cell.data)"
+                           icon="rename"/>
+            </div>
+        </dxi-column>
+    </dx-data-grid>
+</div>
+
+<app-popup *ngIf="isPopupVisible"
+           [currentHero]="heroData"
+           [(isPopupVisible)]="isPopupVisible"/>
