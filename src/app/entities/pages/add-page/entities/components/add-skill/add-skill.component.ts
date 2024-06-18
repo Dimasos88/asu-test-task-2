@@ -51,8 +51,8 @@ export class AddSkillComponent implements OnInit {
         )
             .subscribe(() => {
                 this.addSkillFormGroup.reset();
-                this.getFormControl(LAddHero.ABILITY_ID)?.disable();
-                this.getFormControl(LAddHero.ABILITY_LEVEL)?.disable();
+                this.getAddSkillFormControl(LAddHero.ABILITY_ID)?.disable();
+                this.getAddSkillFormControl(LAddHero.ABILITY_LEVEL)?.disable();
             });
     };
 
@@ -60,15 +60,15 @@ export class AddSkillComponent implements OnInit {
      * Подписываемся на изменение формы
      */
     public _subscribeSelectedHero(): void {
-        this.getFormControl(LInquiryHero.ID).valueChanges
+        this.getAddSkillFormControl(LInquiryHero.ID).valueChanges
             .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
-                if (this.getFormControl(LInquiryHero.ID).value) {
-                    this.getFormControl(LAddHero.ABILITY_ID).enable();
-                    this.getFormControl(LAddHero.ABILITY_LEVEL).enable();
+                if (this.getAddSkillFormControl(LInquiryHero.ID).value) {
+                    this.getAddSkillFormControl(LAddHero.ABILITY_ID).enable();
+                    this.getAddSkillFormControl(LAddHero.ABILITY_LEVEL).enable();
                 } else {
-                    this.getFormControl(LAddHero.ABILITY_ID).disable();
-                    this.getFormControl(LAddHero.ABILITY_LEVEL).disable();
+                    this.getAddSkillFormControl(LAddHero.ABILITY_ID).disable();
+                    this.getAddSkillFormControl(LAddHero.ABILITY_LEVEL).disable();
                 }
             });
     };
@@ -77,7 +77,7 @@ export class AddSkillComponent implements OnInit {
      * Обращаемся к полю формы
      * @param {string} field - название поля формы
      */
-    public getFormControl(field: string): FormControl {
+    public getAddSkillFormControl(field: string): FormControl {
         return this.addSkillFormGroup.get(field) as FormControl;
     };
 }
