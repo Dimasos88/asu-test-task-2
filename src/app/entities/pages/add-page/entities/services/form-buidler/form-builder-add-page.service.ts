@@ -39,8 +39,8 @@ export class FormBuilderAddPageService {
     public get addSkillFormGroup(): FormGroup {
         return this._formBuilder.group({
             [LInquiryHero.ID]: [null, [Validators.required]],
-            [LAddHero.ABILITY_ID]: [null, [Validators.required]],
-            [LAddHero.ABILITY_LEVEL]: [null, [Validators.required]]
+            [LAddHero.ABILITY_ID]: [{value: null, disabled: true}, [Validators.required]],
+            [LAddHero.ABILITY_LEVEL]: [{value: null, disabled: true}, [Validators.required]]
         });
     }
 

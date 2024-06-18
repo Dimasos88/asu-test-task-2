@@ -47,5 +47,5 @@ export class GridPageComponent implements OnInit {
     public openPopup(hero: IInquiryHero): void {
         this.heroData = hero;
         this.isPopupVisible = !this.isPopupVisible;
-    };
+    }
 }
