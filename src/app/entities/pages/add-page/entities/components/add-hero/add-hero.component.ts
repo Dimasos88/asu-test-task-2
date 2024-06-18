@@ -30,7 +30,7 @@ export class AddHeroComponent {
     protected readonly LItem: typeof LItem = LItem;
 
     /**
-     * Создание нового героя
+     * Метод создание нового героя
      */
     public createHero(): void {
         const postHero: IInquiryHero = {
