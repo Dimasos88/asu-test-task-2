@@ -17,5 +17,5 @@ export const routes: Routes = [
         path: '**',
         redirectTo: 'add-page',
         pathMatch: 'full'
-    },
+    }
 ];

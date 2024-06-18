@@ -19,7 +19,8 @@
         </div>
         <div class="inner-component">
             <dx-select-box [formControlName]="LAddHero.ABILITY_ID"
-                           [isValid]="addSkillFormGroup.get(LAddHero.ABILITY_ID)!.untouched || addSkillFormGroup.get(LAddHero.ABILITY_ID)!.valid"
+                           [isValid]="addSkillFormGroup.get(LAddHero.ABILITY_ID)!.untouched ||
+                                      addSkillFormGroup.get(LAddHero.ABILITY_ID)!.valid"
                            [dataSource]="heroSkillData"
                            [searchEnabled]="true"
                            [valueExpr]="LAddHeroSkill.ID"
@@ -33,7 +34,8 @@
         </div>
         <div class="inner-component">
             <dx-number-box [formControlName]="LAddHero.ABILITY_LEVEL"
-                           [isValid]="addSkillFormGroup.get(LAddHero.ABILITY_LEVEL)!.untouched || addSkillFormGroup.get(LAddHero.ABILITY_LEVEL)!.valid"
+                           [isValid]="addSkillFormGroup.get(LAddHero.ABILITY_LEVEL)!.untouched ||
+                                      addSkillFormGroup.get(LAddHero.ABILITY_LEVEL)!.valid"
                            [min]="1"
                            [step]="1"
                            [showSpinButtons]="true"

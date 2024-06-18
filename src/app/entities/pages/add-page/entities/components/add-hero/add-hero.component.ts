@@ -21,16 +21,17 @@ import {ApiAddHeroService} from "src/app/entities/pages/add-page/entities/servic
 })
 export class AddHeroComponent {
     private readonly _formBuilderAddPageService: FormBuilderAddPageService = inject(FormBuilderAddPageService);
-    protected readonly _ApiAddHeroService: ApiAddHeroService = inject(ApiAddHeroService);
+    private readonly _apiAddHeroService: ApiAddHeroService = inject(ApiAddHeroService);
 
     public heroSkillData: IItem[] = MHeroSkillsData;
+
     public addHeroFormGroup: FormGroup = this._formBuilderAddPageService.addHeroFormGroup;
 
     protected readonly LAddHero: typeof LAddHero = LAddHero;
     protected readonly LItem: typeof LItem = LItem;
 
     /**
-     * Метод создание нового героя
+     * Метод создания нового героя
      */
     public createHero(): void {
         const postHero: IInquiryHero = {
@@ -45,7 +46,7 @@ export class AddHeroComponent {
             [LInquiryHero.HERO_LEVEL]: this.addHeroFormGroup.value[LAddHero.HERO_LEVEL]
         };
 
-        this._ApiAddHeroService.addHero$(postHero)
+        this._apiAddHeroService.addHero$(postHero)
             .subscribe(() => {
                 this.addHeroFormGroup.reset();
             });

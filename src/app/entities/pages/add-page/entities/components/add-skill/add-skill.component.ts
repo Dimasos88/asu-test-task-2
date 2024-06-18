@@ -29,6 +29,7 @@ export class AddSkillComponent implements OnInit {
     public heroesData$ = this._apiAddHeroService.heroesData$;
 
     protected readonly heroSkillData: IItem[] = MHeroSkillsData;
+
     protected readonly LInquiryHero: typeof LInquiryHero = LInquiryHero;
     protected readonly LAddHero: typeof LAddHero = LAddHero;
     protected readonly LItem: typeof LItem = LItem;
@@ -39,7 +40,7 @@ export class AddSkillComponent implements OnInit {
         this.getForm(LAddHero.ABILITY_ID)?.disable();
         this.getForm(LAddHero.ABILITY_LEVEL)?.disable();
         this._subscribeSelectedHero();
-    };
+    }
 
     /**
      * Передаём данные формы в put-запрос, очищаем форму
@@ -64,8 +65,14 @@ export class AddSkillComponent implements OnInit {
         this.getForm(LInquiryHero.ID).valueChanges
             .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
-                this.getForm(LAddHero.ABILITY_ID)?.enable();
-                this.getForm(LAddHero.ABILITY_LEVEL)?.enable();
+                if (this.getForm(LInquiryHero.ID).value) {
+                    this.getForm(LAddHero.ABILITY_ID).enable();
+                    this.getForm(LAddHero.ABILITY_LEVEL).enable();
+                }
+                else {
+                    this.getForm(LAddHero.ABILITY_ID).disable();
+                    this.getForm(LAddHero.ABILITY_LEVEL).disable();
+                }
             });
     };
 

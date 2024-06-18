@@ -32,7 +32,7 @@ import {IAbility} from "../../../../add-page/entities/components/add-hero/entiti
 })
 export class PopupComponent implements OnInit, AfterViewInit {
     private readonly _formBuilderAddPageService: FormBuilderAddPageService = inject(FormBuilderAddPageService);
-    private readonly _ApiAddHeroService: ApiAddHeroService = inject(ApiAddHeroService);
+    private readonly _apiAddHeroService: ApiAddHeroService = inject(ApiAddHeroService);
     private readonly _destroyRef: DestroyRef = inject(DestroyRef);
 
     @Input({required: true})
@@ -45,13 +45,14 @@ export class PopupComponent implements OnInit, AfterViewInit {
     public isPopupVisibleChange: EventEmitter<boolean> = new EventEmitter<boolean>;
 
     protected readonly heroSkillData: typeof MHeroSkillsData = MHeroSkillsData;
+
     protected readonly LAddHeroSkill: typeof  LAbility = LAbility;
     protected readonly LInquiryHero: typeof LInquiryHero = LInquiryHero;
     protected readonly LItem: typeof LItem = LItem;
 
     public redactHeroFormGroup: FormGroup = this._formBuilderAddPageService.redactHeroFormGroup;
 
-    public isFormUnchanged$: Observable<boolean>  = of(true);
+    public isFormUnchanged$: Observable<boolean> = of(true);
 
     public ngOnInit(): void {
         this.getForm(LInquiryHero.NAME).setValue(this.currentHero[LInquiryHero.NAME]);
@@ -61,11 +62,11 @@ export class PopupComponent implements OnInit, AfterViewInit {
             this.abilities.push(this._formBuilderAddPageService.addSkillsFormGroup);
         });
         this.getForm(LInquiryHero.ABILITIES).patchValue(this.currentHero[LInquiryHero.ABILITIES]);
-    };
+    }
 
     public ngAfterViewInit(): void {
         this._subscribeFormEditing();
-    };
+    }
 
     /**
      * Подписка на изменение формы и сравнение с начальными данными героя
@@ -111,7 +112,7 @@ export class PopupComponent implements OnInit, AfterViewInit {
      * Изменение героя
      */
     public editHero(): void {
-        this._ApiAddHeroService.redactHeroApi(
+        this._apiAddHeroService.redactHeroApi(
             this.currentHero[LInquiryHero.ID],
             this.redactHeroFormGroup.value[LInquiryHero.NAME],
             this.redactHeroFormGroup.value[LInquiryHero.POWER],

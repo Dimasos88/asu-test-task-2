@@ -40,7 +40,7 @@ export class FormBuilderAddPageService {
         return this._formBuilder.group({
             [LInquiryHero.ID]: [null, [Validators.required]],
             [LAddHero.ABILITY_ID]: [null, [Validators.required]],
-            [LAddHero.ABILITY_LEVEL]: [null, [Validators.required]],
+            [LAddHero.ABILITY_LEVEL]: [null, [Validators.required]]
         });
     }
 

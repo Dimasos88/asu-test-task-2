@@ -44,7 +44,7 @@ export class ApiAddHeroService {
      * @param {number} abilityLevel - уровень способности
      */
     public addNewSkillApi(heroId: number, abilityId: number, abilityLevel: number): any {
-        const hero: IInquiryHero | undefined = this._heroesData$$.value.find((item: IInquiryHero) => item[LInquiryHero.ID] === heroId);
+        const hero: IInquiryHero = this._heroesData$$.value.find((item: IInquiryHero) => item[LInquiryHero.ID] === heroId)!;
 
         if (hero) {
             const body: Record<string, IAbility[]> = {

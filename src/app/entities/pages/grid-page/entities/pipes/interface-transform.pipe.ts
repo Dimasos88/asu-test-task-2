@@ -14,8 +14,8 @@ import {LAbility} from "../../../add-page/entities/components/add-hero/entities/
 export class InterfaceTransformPipe implements PipeTransform {
     /**
      * Перевод id способностей в их названия
-     * @param {} value - массив способностей героя
-     * @param {} skillThesaurus - справочник способностей
+     * @param {IAbility[]} value - массив способностей героя
+     * @param {IItem[]} skillThesaurus - справочник способностей
      */
     public transform(value: IAbility[], skillThesaurus: IItem[]) {
         return value
