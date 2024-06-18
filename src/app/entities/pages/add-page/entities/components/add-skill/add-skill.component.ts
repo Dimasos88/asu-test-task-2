@@ -37,6 +37,8 @@ export class AddSkillComponent implements OnInit {
 
     public ngOnInit(): void {
         this._apiAddHeroService.getHeroes().subscribe();
+        this.getForm(LAddHero.ABILITY_ID)?.disable();
+        this.getForm(LAddHero.ABILITY_LEVEL)?.disable();
         this._subscribeSelectedHero();
     }
 
@@ -51,8 +53,8 @@ export class AddSkillComponent implements OnInit {
         )
             .subscribe(() => {
                 this.addSkillFormGroup.reset();
-                this.getAddSkillFormControl(LAddHero.ABILITY_ID)?.disable();
-                this.getAddSkillFormControl(LAddHero.ABILITY_LEVEL)?.disable();
+                this.getForm(LAddHero.ABILITY_ID)?.disable();
+                this.getForm(LAddHero.ABILITY_LEVEL)?.disable();
             });
     };
 
@@ -60,15 +62,16 @@ export class AddSkillComponent implements OnInit {
      * Подписываемся на изменение формы
      */
     public _subscribeSelectedHero(): void {
-        this.getAddSkillFormControl(LInquiryHero.ID).valueChanges
+        this.getForm(LInquiryHero.ID).valueChanges
             .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
-                if (this.getAddSkillFormControl(LInquiryHero.ID).value) {
-                    this.getAddSkillFormControl(LAddHero.ABILITY_ID).enable();
-                    this.getAddSkillFormControl(LAddHero.ABILITY_LEVEL).enable();
-                } else {
-                    this.getAddSkillFormControl(LAddHero.ABILITY_ID).disable();
-                    this.getAddSkillFormControl(LAddHero.ABILITY_LEVEL).disable();
+                if (this.getForm(LInquiryHero.ID).value) {
+                    this.getForm(LAddHero.ABILITY_ID).enable();
+                    this.getForm(LAddHero.ABILITY_LEVEL).enable();
+                }
+                else {
+                    this.getForm(LAddHero.ABILITY_ID).disable();
+                    this.getForm(LAddHero.ABILITY_LEVEL).disable();
                 }
             });
     };
@@ -77,7 +80,7 @@ export class AddSkillComponent implements OnInit {
      * Обращаемся к полю формы
      * @param {string} field - название поля формы
      */
-    public getAddSkillFormControl(field: string): FormControl {
+    public getForm(field: string): FormControl {
         return this.addSkillFormGroup.get(field) as FormControl;
     };
 }

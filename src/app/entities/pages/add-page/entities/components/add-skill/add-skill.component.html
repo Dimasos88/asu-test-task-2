@@ -8,8 +8,8 @@
             <dx-select-box [formControlName]="LInquiryHero.ID"
                            [searchEnabled]="true"
                            [dataSource]="heroesData$ | async"
-                           valueExpr="id"
-                           displayExpr="name"
+                           [valueExpr]="LInquiryHero.ID"
+                           [displayExpr]="LInquiryHero.NAME"
                            placeholder="Выберите вашего героя"/>
         </div>
     </div>
@@ -47,8 +47,7 @@
             <dx-button [disabled]="!addSkillFormGroup.valid"
                        (onClick)="addNewSkill()"
                        text="Добавить способность"
-                       type="default"
-                       icon=""/>
+                       type="default"/>
         </div>
     </div>
 </div>

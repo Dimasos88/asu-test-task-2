@@ -1,7 +1,7 @@
 import {LItem} from "../labels/item.label";
 
 /**
- * Интерфейс для добавления сособности
+ * Интерфейс для добавления способности
  *
  * @property {number} ID - идентификатор способности
  * @property {string} NAME - название способности

@@ -21,20 +21,17 @@ export class ApiAddHeroService {
      */
     public addHero$(postData: IInquiryHero): Observable<any> {
          return this._httpClient.post('http://127.0.0.1:3000/items', postData).pipe(
-             switchMap(() => {
-                 return this.getHeroes();
-             })
+             switchMap(() => this.getHeroes())
          );
     };
 
     /**
      * Получение массива всех героев
      */
-    public getHeroes(): Observable<void> {
+    public getHeroes(): Observable<IInquiryHero[]> {
         return this._httpClient.get('http://127.0.0.1:3000/items').pipe(
-            tap((heroesData: any) => {
-                this._heroesData$$.next(heroesData);
-            }));
+            tap((heroesData: IInquiryHero[]) => this._heroesData$$.next(heroesData))
+        );
     };
 
     /**
@@ -58,9 +55,7 @@ export class ApiAddHeroService {
             };
 
             return this._httpClient.put(`http://127.0.0.1:3000/items/${heroId}`, body).pipe(
-                switchMap(() => {
-                    return this.getHeroes();
-                })
+                switchMap(() => this.getHeroes())
             );
         }
     };
@@ -71,7 +66,7 @@ export class ApiAddHeroService {
      * @param {string} heroName - имя героя
      * @param {number} heroPower - сила героя
      * @param {number} heroLevel - уровень героя
-     * @param {IAbility[]} newAbilities - список новых способностей(идентификатор способности и уровень)
+     * @param {IAbility[]} newAbilities - список новых способностей (идентификатор способности и уровень)
      */
     public redactHeroApi(heroId: number, heroName: string, heroPower: number, heroLevel: number, newAbilities: IAbility[]): Observable<any> {
         const body: IInquiryHero = {
@@ -82,9 +77,7 @@ export class ApiAddHeroService {
         };
 
         return this._httpClient.put(`http://127.0.0.1:3000/items/${heroId}`, body).pipe(
-            switchMap(() => {
-                return this.getHeroes();
-            })
+            switchMap(() => this.getHeroes())
         );
     };
 }

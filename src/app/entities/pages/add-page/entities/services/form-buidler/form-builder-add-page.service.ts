@@ -11,7 +11,7 @@ export class FormBuilderAddPageService {
     private readonly _formBuilder: FormBuilder = inject(FormBuilder);
 
     /**
-     * Записаваем данные из формы
+     * Записываем данные из формы
      */
     public get addHeroFormGroup(): FormGroup {
         return this._formBuilder.group({
@@ -24,7 +24,7 @@ export class FormBuilderAddPageService {
     }
 
     /**
-     * Записаваем данные из формы
+     * Записываем данные из формы
      */
     public get addSkillsFormGroup(): FormGroup {
         return this._formBuilder.group({
@@ -34,7 +34,7 @@ export class FormBuilderAddPageService {
     }
 
     /**
-     * Записаваем данные из формы
+     * Записываем данные из формы
      */
     public get addSkillFormGroup(): FormGroup {
         return this._formBuilder.group({
@@ -45,7 +45,7 @@ export class FormBuilderAddPageService {
     }
 
     /**
-     * Записаваем данные из формы
+     * Записываем данные из формы
      */
     public get redactHeroFormGroup(): FormGroup {
         return this._formBuilder.group({

@@ -41,11 +41,11 @@ export class GridPageComponent implements OnInit {
     }
 
     /**
-     * Открытие попапа и
+     * Открытие попапа и запись данных героя
      * @param {IInquiryHero} hero - герой
      */
     public openPopup(hero: IInquiryHero): void {
         this.heroData = hero;
         this.isPopupVisible = !this.isPopupVisible;
-    }
+    };
 }
