@@ -1,4 +1,4 @@
-@mixin flexWrapper($flex-direction, $justify-content, $align-items: flex-start) {
+@mixin flexWrapper($flex-direction, $justify-content, $align-items: normal) {
     display: flex;
     flex-direction: $flex-direction;
     justify-content: $justify-content;

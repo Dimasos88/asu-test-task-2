@@ -1,11 +1,12 @@
 @import "src/assets/styles/theming";
 :host {
+    @include flexWrapper(column, center);
+    gap: 25px;
 
     .add-hero-container, .add-skill-container {
-        @include flexWrapper(row, center, normal);
+        @include flexWrapper(row, center);
         width: 45vw;
         height: 40vh;
-        margin-top: 25px;
         background-color: $main-color;
     }
 }

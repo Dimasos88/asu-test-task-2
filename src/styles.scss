@@ -1,7 +1,7 @@
 @import "src/assets/styles/theming";
 
 body {
-    @include flexWrapper(row, center, normal);
+    @include flexWrapper(row, center);
     font-family: "Roboto", sans-serif;
     font-weight: 500;
     font-style: normal;

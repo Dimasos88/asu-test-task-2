@@ -22,7 +22,6 @@ import {map, Observable, of} from "rxjs";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {IAbility} from "../../../../add-page/entities/components/add-hero/entities/interfaces/ability.interface";
 
-
 @Component({
     selector: 'app-popup',
     standalone: true,
@@ -30,7 +29,7 @@ import {IAbility} from "../../../../add-page/entities/components/add-hero/entiti
     templateUrl: './popup.component.html',
     styleUrls: ['./popup.component.scss']
 })
-export class PopupComponent implements OnInit, AfterViewInit {
+export class PopupComponent implements OnInit {
     private readonly _formBuilderAddPageService: FormBuilderAddPageService = inject(FormBuilderAddPageService);
     private readonly _apiAddHeroService: ApiAddHeroService = inject(ApiAddHeroService);
     private readonly _destroyRef: DestroyRef = inject(DestroyRef);
@@ -50,21 +49,21 @@ export class PopupComponent implements OnInit, AfterViewInit {
     protected readonly LInquiryHero: typeof LInquiryHero = LInquiryHero;
     protected readonly LItem: typeof LItem = LItem;
 
-    public redactHeroFormGroup: FormGroup = this._formBuilderAddPageService.redactHeroFormGroup;
+    public redactHeroFormGroup: FormGroup = this._formBuilderAddPageService.redactHeroGroup;
 
     public isFormUnchanged$: Observable<boolean> = of(true);
 
     public ngOnInit(): void {
-        this.getForm(LInquiryHero.NAME).setValue(this.currentHero[LInquiryHero.NAME]);
-        this.getForm(LInquiryHero.POWER).setValue(this.currentHero[LInquiryHero.POWER]);
-        this.getForm(LInquiryHero.HERO_LEVEL).setValue(this.currentHero[LInquiryHero.HERO_LEVEL]);
-        this.currentHero[LInquiryHero.ABILITIES].forEach(() => {
-            this.abilities.push(this._formBuilderAddPageService.addSkillsFormGroup);
+        this.redactHeroFormGroup.patchValue({
+            [LInquiryHero.NAME]: this.currentHero[LInquiryHero.NAME],
+            [LInquiryHero.POWER]: this.currentHero[LInquiryHero.POWER],
+            [LInquiryHero.HERO_LEVEL]: this.currentHero[LInquiryHero.HERO_LEVEL]
         });
-        this.getForm(LInquiryHero.ABILITIES).patchValue(this.currentHero[LInquiryHero.ABILITIES]);
-    }
+        this.currentHero[LInquiryHero.ABILITIES].forEach(() => {
+            this.abilities.push(this._formBuilderAddPageService.addSkillsGroup);
+        });
+        this.getRedactHeroControl(LInquiryHero.ABILITIES).patchValue(this.currentHero[LInquiryHero.ABILITIES]);
 
-    public ngAfterViewInit(): void {
         this._subscribeFormEditing();
     }
 
@@ -76,10 +75,10 @@ export class PopupComponent implements OnInit, AfterViewInit {
             .pipe(
                 takeUntilDestroyed(this._destroyRef),
                 map(() => {
-                    return this.redactHeroFormGroup.get(LInquiryHero.NAME).value === this.currentHero[LInquiryHero.NAME] &&
-                           this.redactHeroFormGroup.get(LInquiryHero.POWER).value === this.currentHero[LInquiryHero.POWER] &&
-                           this.redactHeroFormGroup.get(LInquiryHero.HERO_LEVEL).value === this.currentHero[LInquiryHero.HERO_LEVEL] &&
-                           this.compareAbilities(this.redactHeroFormGroup.get(LInquiryHero.ABILITIES).value, this.currentHero[LInquiryHero.ABILITIES]);
+                    return this.getRedactHeroControl(LInquiryHero.NAME).value === this.currentHero[LInquiryHero.NAME] &&
+                           this.getRedactHeroControl(LInquiryHero.POWER).value === this.currentHero[LInquiryHero.POWER] &&
+                           this.getRedactHeroControl(LInquiryHero.HERO_LEVEL).value === this.currentHero[LInquiryHero.HERO_LEVEL] &&
+                           this.isAbilitiesEqual(this.redactHeroFormGroup.get(LInquiryHero.ABILITIES).value, this.currentHero[LInquiryHero.ABILITIES]);
                 })
             );
     };
@@ -89,7 +88,7 @@ export class PopupComponent implements OnInit, AfterViewInit {
      * @param {IAbility[]} newHeroSkills - новый массив способностей
      * @param {IAbility[]} currentHeroSkills - текущий массив способностей
      */
-    public compareAbilities(newHeroSkills: IAbility[], currentHeroSkills: IAbility[]): boolean {
+    public isAbilitiesEqual(newHeroSkills: IAbility[], currentHeroSkills: IAbility[]): boolean {
         if (newHeroSkills.length !== currentHeroSkills.length) {
             return false;
         }
@@ -112,7 +111,7 @@ export class PopupComponent implements OnInit, AfterViewInit {
      * Изменение героя
      */
     public editHero(): void {
-        this._apiAddHeroService.redactHeroApi(
+        this._apiAddHeroService.editHeroApi(
             this.currentHero[LInquiryHero.ID],
             this.redactHeroFormGroup.value[LInquiryHero.NAME],
             this.redactHeroFormGroup.value[LInquiryHero.POWER],
@@ -129,23 +128,23 @@ export class PopupComponent implements OnInit, AfterViewInit {
      * Получить формконтрол
      * @param {any} field - название формконтрола
      */
-    public getForm(field: string): FormControl {
+    public getRedactHeroControl(field: string): FormControl {
         return this.redactHeroFormGroup.get(field) as FormControl;
-    };
+    }
 
     /**
      * Получить формконтрол для массива способностей
      */
-    public get abilities() : FormArray {
+    public get abilities(): FormArray {
         return this.redactHeroFormGroup.get(LInquiryHero.ABILITIES) as FormArray;
-    };
+    }
 
     /**
      * Добавить новую способность (формгруппу) в массив FormArray
      */
     public addAbilities(): void {
-        this.abilities.push(this._formBuilderAddPageService.addSkillsFormGroup);
-    };
+        this.abilities.push(this._formBuilderAddPageService.addSkillsGroup);
+    }
 
     /**
      * Удалить формгруппу для новой способности
@@ -153,5 +152,5 @@ export class PopupComponent implements OnInit, AfterViewInit {
     public removeAbility(abilityIndex: number): void {
         this.redactHeroFormGroup.markAsDirty();
         this.abilities.removeAt(abilityIndex);
-    };
+    }
 }

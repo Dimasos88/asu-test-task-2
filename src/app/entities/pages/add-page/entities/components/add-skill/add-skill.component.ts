@@ -24,7 +24,7 @@ export class AddSkillComponent implements OnInit {
     private readonly _formBuilderAddPageService: FormBuilderAddPageService = inject(FormBuilderAddPageService);
     private readonly _destroyRef: DestroyRef = inject(DestroyRef);
 
-    public addSkillFormGroup: FormGroup = this._formBuilderAddPageService.addSkillFormGroup;
+    public addSkillFormGroup: FormGroup = this._formBuilderAddPageService.addSkillGroup;
 
     public heroesData$ = this._apiAddHeroService.heroesData$;
 
@@ -37,8 +37,6 @@ export class AddSkillComponent implements OnInit {
 
     public ngOnInit(): void {
         this._apiAddHeroService.getHeroes().subscribe();
-        this.getForm(LAddHero.ABILITY_ID)?.disable();
-        this.getForm(LAddHero.ABILITY_LEVEL)?.disable();
         this._subscribeSelectedHero();
     }
 
@@ -53,8 +51,8 @@ export class AddSkillComponent implements OnInit {
         )
             .subscribe(() => {
                 this.addSkillFormGroup.reset();
-                this.getForm(LAddHero.ABILITY_ID)?.disable();
-                this.getForm(LAddHero.ABILITY_LEVEL)?.disable();
+                this.getAddSkillFormControl(LAddHero.ABILITY_ID)?.disable();
+                this.getAddSkillFormControl(LAddHero.ABILITY_LEVEL)?.disable();
             });
     };
 
@@ -62,16 +60,15 @@ export class AddSkillComponent implements OnInit {
      * Подписываемся на изменение формы
      */
     public _subscribeSelectedHero(): void {
-        this.getForm(LInquiryHero.ID).valueChanges
+        this.getAddSkillFormControl(LInquiryHero.ID).valueChanges
             .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
-                if (this.getForm(LInquiryHero.ID).value) {
-                    this.getForm(LAddHero.ABILITY_ID).enable();
-                    this.getForm(LAddHero.ABILITY_LEVEL).enable();
-                }
-                else {
-                    this.getForm(LAddHero.ABILITY_ID).disable();
-                    this.getForm(LAddHero.ABILITY_LEVEL).disable();
+                if (this.getAddSkillFormControl(LInquiryHero.ID).value) {
+                    this.getAddSkillFormControl(LAddHero.ABILITY_ID).enable();
+                    this.getAddSkillFormControl(LAddHero.ABILITY_LEVEL).enable();
+                } else {
+                    this.getAddSkillFormControl(LAddHero.ABILITY_ID).disable();
+                    this.getAddSkillFormControl(LAddHero.ABILITY_LEVEL).disable();
                 }
             });
     };
@@ -80,7 +77,7 @@ export class AddSkillComponent implements OnInit {
      * Обращаемся к полю формы
      * @param {string} field - название поля формы
      */
-    public getForm(field: string): FormControl {
+    public getAddSkillFormControl(field: string): FormControl {
         return this.addSkillFormGroup.get(field) as FormControl;
-    };
+    }
 }

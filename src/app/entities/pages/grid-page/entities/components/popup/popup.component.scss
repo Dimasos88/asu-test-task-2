@@ -1,5 +1,4 @@
 @import "src/assets/styles/theming";
-
 .component-wrapper {
     @include flexWrapper(row,space-around, normal);
     width: 100%;

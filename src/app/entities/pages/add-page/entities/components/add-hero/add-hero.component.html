@@ -1,78 +1,82 @@
 <div [formGroup]="addHeroFormGroup"
      class="component-wrapper">
-  <div class="component">
-    <div class="title">
-      Имя:
+    <div *ngLet="addHeroFormGroup.get(LAddHero.NAME) as NameControl"
+         class="component">
+        <div class="title">
+            Имя:
+        </div>
+        <div class="inner-component">
+            <dx-text-box [formControlName]="LAddHero.NAME"
+                         [isValid]="NameControl!.untouched || NameControl!.valid"
+                         placeholder="Введите имя героя"
+                         mode="url"/>
+        </div>
     </div>
-    <div class="inner-component">
-      <dx-text-box [formControlName]="LAddHero.NAME"
-                   [isValid]="addHeroFormGroup.get(LAddHero.NAME)!.untouched ||
-                              addHeroFormGroup.get(LAddHero.NAME)!.valid"
-                   mode="url"
-                   placeholder="Введите имя героя"/>
+    <div *ngLet="addHeroFormGroup.get(LAddHero.NAME) as PowerControl"
+         class="component">
+        <div class="title">
+            Сила:
+        </div>
+        <div class="inner-component">
+            <dx-number-box [formControlName]="LAddHero.POWER"
+                           [min]="1"
+                           [step]="1"
+                           [showSpinButtons]="true"
+                           [isValid]="PowerControl!.untouched || PowerControl!.valid"
+                           placeholder="Введите силу героя"/>
+        </div>
     </div>
-  </div>
-  <div class="component">
-    <div class="title">
-      Сила:
+    <div class="skill-components">
+        <div *ngLet="addHeroFormGroup.get(LAddHero.NAME) as AbilityIdControl"
+             class="component">
+            <div class="title">
+                Способность:
+            </div>
+            <div class="inner-component">
+                <dx-select-box [formControlName]="LAddHero.ABILITY_ID"
+                               [dataSource]="heroSkillData"
+                               [searchEnabled]="true"
+                               [valueExpr]="LItem.ID"
+                               [displayExpr]="LItem.NAME"
+                               [isValid]="AbilityIdControl!.untouched || AbilityIdControl!.valid"
+                               placeholder="Выберите способность"/>
+            </div>
+        </div>
+        <div *ngLet="addHeroFormGroup.get(LAddHero.ABILITY_LEVEL) as AbilityLevelControl"
+             class="component inline-component">
+            <div class="title inline-title">
+                Уровень:
+            </div>
+            <div class="inner-component">
+                <dx-number-box [formControlName]="LAddHero.ABILITY_LEVEL"
+                               [min]="1"
+                               [step]="1"
+                               [showSpinButtons]="true"
+                               [isValid]="AbilityLevelControl!.untouched || AbilityLevelControl!.valid"
+                               placeholder="Введите уровень способности"/>
+            </div>
+        </div>
     </div>
-    <div class="inner-component">
-      <dx-number-box [formControlName]="LAddHero.POWER"
-                     [min]="1"
-                     [step]="1"
-                     [showSpinButtons]="true"
-                     [isValid]="addHeroFormGroup.get(LAddHero.POWER)!.untouched || addHeroFormGroup.get(LAddHero.POWER)!.valid"
-                     placeholder="Введите силу героя"/>
+    <div *ngLet="addHeroFormGroup.get(LAddHero.HERO_LEVEL) as HeroLevelControl"
+         class="component">
+        <div class="title">
+            Начальный уровень:
+        </div>
+        <div class="inner-component">
+            <dx-number-box [formControlName]="LAddHero.HERO_LEVEL"
+                           [min]="1"
+                           [step]="1"
+                           [showSpinButtons]="true"
+                           [isValid]="HeroLevelControl!.untouched || HeroLevelControl!.valid"
+                           placeholder="Введите начальный уровень героя"/>
+        </div>
     </div>
-  </div>
-  <div class="skill-components">
     <div class="component">
-      <div class="title">
-        Способность:
-      </div>
-      <div class="inner-component">
-        <dx-select-box [formControlName]="LAddHero.ABILITY_ID"
-                       [dataSource]="heroSkillData"
-                       [searchEnabled]="true"
-                       [valueExpr]="LItem.ID"
-                       [displayExpr]="LItem.NAME"
-                       [isValid]="addHeroFormGroup.get(LAddHero.ABILITY_ID)!.untouched || addHeroFormGroup.get(LAddHero.ABILITY_ID)!.valid"
-                       placeholder="Выберите способность"/>
-      </div>
+        <div class="button-wrapper">
+            <dx-button [disabled]="addHeroFormGroup.invalid"
+                       (onClick)="createHero()"
+                       text="Создать героя"
+                       type="default"/>
+        </div>
     </div>
-    <div class="component inline-component">
-      <div class="title inline-title">
-        Уровень:
-      </div>
-      <div class="inner-component">
-        <dx-number-box [formControlName]="LAddHero.ABILITY_LEVEL"
-                       [min]="1"
-                       [step]="1"
-                       [showSpinButtons]="true"
-                       [isValid]="addHeroFormGroup.get(LAddHero.ABILITY_LEVEL)!.untouched || addHeroFormGroup.get(LAddHero.ABILITY_LEVEL)!.valid"
-                       placeholder="Введите уровень способности"/>
-      </div>
-    </div>
-  </div>
-  <div class="component">
-    <div class="title">
-      Начальный уровень:
-    </div>
-    <div class="inner-component">
-      <dx-number-box [formControlName]="LAddHero.HERO_LEVEL"
-                     [min]="1"
-                     [step]="1"
-                     [showSpinButtons]="true"
-                     [isValid]="addHeroFormGroup.get(LAddHero.HERO_LEVEL)!.untouched || addHeroFormGroup.get(LAddHero.HERO_LEVEL)!.valid"
-                     placeholder="Введите начальный уровень героя"/>
-    </div>
-  </div>
-  <div class="component">
-    <div class="button-wrapper">
-      <dx-button [disabled]="addHeroFormGroup.invalid"
-                 (onClick)="createHero()"
-                 text="Создать героя"
-                 type="default"/>
-    </div>
-  </div>
 </div>

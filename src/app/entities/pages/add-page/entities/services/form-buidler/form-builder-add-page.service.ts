@@ -11,49 +11,48 @@ export class FormBuilderAddPageService {
     private readonly _formBuilder: FormBuilder = inject(FormBuilder);
 
     /**
-     * Записываем данные из формы
+     * Получаем форму для добавления героя
      */
-    public get addHeroFormGroup(): FormGroup {
+    public get addHeroGroup(): FormGroup {
         return this._formBuilder.group({
-            [LAddHero.NAME]: [null, [Validators.required, Validators.pattern(/^(?!\s)[А-Яа-яЁё\sa-zA-Z]*(?<!\s)$/)]],
+            [LAddHero.NAME]: [null, [Validators.required, Validators.pattern(/^(?!\s)[А-яЁё\sA-z]*(?<!\s)$/)]],
             [LAddHero.POWER]: [null, [Validators.required]],
             [LAddHero.ABILITY_ID]: [null, [Validators.required]],
             [LAddHero.ABILITY_LEVEL]: [null, [Validators.required]],
             [LAddHero.HERO_LEVEL]: [null, [Validators.required]]
         });
-    }
+    };
 
     /**
-     * Записываем данные из формы
+     * Получаем форму для добавления способностей
      */
-    public get addSkillsFormGroup(): FormGroup {
+    public get addSkillsGroup(): FormGroup {
         return this._formBuilder.group({
             [LAbility.ID]: [null, [Validators.required]],
             [LAbility.LEVEL]: [null, [Validators.required]]
         });
-    }
+    };
 
     /**
-     * Записываем данные из формы
+     * Получаем форму для добавления способности
      */
-    public get addSkillFormGroup(): FormGroup {
+    public get addSkillGroup(): FormGroup {
         return this._formBuilder.group({
             [LInquiryHero.ID]: [null, [Validators.required]],
             [LAddHero.ABILITY_ID]: [{value: null, disabled: true}, [Validators.required]],
             [LAddHero.ABILITY_LEVEL]: [{value: null, disabled: true}, [Validators.required]]
         });
-    }
+    };
 
     /**
-     * Записываем данные из формы
+     * Получаем форму для редактирования героя
      */
-    public get redactHeroFormGroup(): FormGroup {
+    public get redactHeroGroup(): FormGroup {
         return this._formBuilder.group({
-            [LInquiryHero.NAME]: [null, [Validators.required, Validators.pattern(/^(?!\s)[А-Яа-яЁё\sa-zA-Z]*(?<!\s)$/)]],
+            [LInquiryHero.NAME]: [null, [Validators.required, Validators.pattern(/^(?!\s)[А-яЁё\sA-z]*(?<!\s)$/)]],
             [LInquiryHero.POWER]: [null, [Validators.required]],
             [LInquiryHero.HERO_LEVEL]: [null, [Validators.required]],
             [LInquiryHero.ABILITIES]: this._formBuilder.array([])
         });
     }
 }
-

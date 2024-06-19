@@ -7,6 +7,6 @@ import {LAbility} from "../labels/ability.label";
  * @property {number} LEVEL - уровень способности
  */
 export interface IAbility {
-    [LAbility.ID]: number,
-    [LAbility.LEVEL]: number
+    [LAbility.ID]: number;
+    [LAbility.LEVEL]: number;
 }

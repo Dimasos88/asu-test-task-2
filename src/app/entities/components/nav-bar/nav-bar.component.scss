@@ -1,12 +1,13 @@
 @import "src/assets/styles/theming";
 :host {
 
-    .nav-bar-wrapper {
+    .nav-bar {
         @include flexWrapper(row, space-around, normal);
         background-color: $main-color;
         width: 45vw;
+        margin-bottom: 25px;
 
-        .tab {
+        &-tab {
             @include flexWrapper(row, space-around, normal);
             width: 100%;
             padding: 15px;

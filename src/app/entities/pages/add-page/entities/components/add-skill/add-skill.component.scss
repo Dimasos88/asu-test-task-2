@@ -2,12 +2,12 @@
 :host {
 
     .component-wrapper {
-        @include flexWrapper(column, space-around, normal);
+        @include flexWrapper(column, space-around);
         height: 100%;
         width: 40vw;
 
         .component {
-            @include flexWrapper(column, space-around, normal);
+            @include flexWrapper(column, space-around);
             max-height: 6vh;
             max-width: 100%;
 
@@ -16,7 +16,7 @@
             }
 
             .button-wrapper {
-                @include flexWrapper(row, flex-end, normal);
+                @include flexWrapper(row, flex-end);
                 width: 100%;
 
                 .dx-button {

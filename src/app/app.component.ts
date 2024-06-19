@@ -5,7 +5,7 @@ import {NavBarComponent} from "./entities/components/nav-bar/nav-bar.component";
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [AddPageComponent, NavBarComponent, NavBarComponent],
+    imports: [AddPageComponent, NavBarComponent],
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })

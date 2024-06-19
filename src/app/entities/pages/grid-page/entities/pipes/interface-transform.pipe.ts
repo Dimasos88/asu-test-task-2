@@ -17,7 +17,7 @@ export class InterfaceTransformPipe implements PipeTransform {
      * @param {IAbility[]} value - массив способностей героя
      * @param {IItem[]} skillThesaurus - справочник способностей
      */
-    public transform(value: IAbility[], skillThesaurus: IItem[]) {
+    public transform(value: IAbility[], skillThesaurus: IItem[]): string {
         return value
             .map((ability: IAbility) => {
                 return skillThesaurus.find((abilityFromThesaurus: IItem) => {
