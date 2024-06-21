@@ -1,0 +1,116 @@
+<dx-popup [hideOnOutsideClick]="true"
+          [dragEnabled]="true"
+          [showTitle]="true"
+          [height]="500"
+          [width]="1000"
+          [(visible)]="isPopupVisible"
+          (onHidden)="closePopup()"
+          title="Редактирование">
+    <div [formGroup]="redactHeroFormGroup"
+         class="component-wrapper">
+        <div class="form-wrapper">
+            <div class="component">
+                <div class="title">
+                    Имя:
+                </div>
+                <div class="inner-component">
+                    <dx-text-box [formControlName]="LInquiryHero.NAME"
+                                 [isValid]="redactHeroFormGroup.get(LInquiryHero.NAME)!.untouched ||
+                                            redactHeroFormGroup.get(LInquiryHero.NAME)!.valid"
+                                 mode="url"
+                                 placeholder="Введите имя героя"/>
+                </div>
+            </div>
+            <div class="component">
+                <div class="title">
+                    Сила:
+                </div>
+                <div class="inner-component">
+                    <dx-number-box [formControlName]="LInquiryHero.POWER"
+                                   [isValid]="redactHeroFormGroup.get(LInquiryHero.POWER)!.untouched ||
+                                              redactHeroFormGroup.get(LInquiryHero.POWER)!.valid"
+                                   [min]="1"
+                                   [step]="1"
+                                   [showSpinButtons]="true"
+                                   placeholder="Введите силу героя"/>
+                </div>
+            </div>
+            <div class="component">
+                <div class="title">
+                    Уровень:
+                </div>
+                <div class="inner-component">
+                    <dx-number-box [formControlName]="LInquiryHero.HERO_LEVEL"
+                                   [isValid]="redactHeroFormGroup.get(LInquiryHero.HERO_LEVEL)!.untouched ||
+                                              redactHeroFormGroup.get(LInquiryHero.HERO_LEVEL)!.valid"
+                                   [min]="1"
+                                   [step]="1"
+                                   [showSpinButtons]="true"
+                                   placeholder="Введите начальный уровень героя"/>
+                </div>
+            </div>
+            <div class="component">
+                <div class="button-wrapper">
+                    <dx-button [disabled]="redactHeroFormGroup.invalid || !redactHeroFormGroup.dirty ||
+                                           (isFormUnchanged$ | async)"
+                               (onClick)="editHero()"
+                               text="Сохранить изменения"
+                               icon="save"
+                               type="default"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-wrapper">
+            <div class="title">
+                Способности:
+            </div>
+            <div class="add-skills-wrapper">
+                <div class="component">
+                    <div [formArrayName]="LInquiryHero.ABILITIES">
+                        <div *ngFor="let ability of abilities.controls; let i=index">
+                            <div [formGroupName]="i"
+                                 class="wrapper">
+                                <div class="inner-component">
+                                    <div class="title">
+                                        Название:
+                                    </div>
+                                    <dx-select-box [formControlName]="LAddHeroSkill.ID"
+                                                   [isValid]="ability.get(LAddHeroSkill.ID).valid ||
+                                                              ability.get(LAddHeroSkill.ID).untouched"
+                                                   [dataSource]="heroSkillData"
+                                                   [searchEnabled]="true"
+                                                   [valueExpr]="LItem.ID"
+                                                   [displayExpr]="LItem.NAME"
+                                                   placeholder="Выберите новую способность"/>
+                                </div>
+                                <div class="inner-component">
+                                    <div class="title">
+                                        Уровень:
+                                    </div>
+                                    <dx-number-box [formControlName]="LAddHeroSkill.LEVEL"
+                                                   [isValid]="ability.get(LAddHeroSkill.LEVEL).valid ||
+                                                              ability.get(LAddHeroSkill.LEVEL).untouched"
+                                                   [min]="1"
+                                                   [step]="1"
+                                                   [showSpinButtons]="true"
+                                                   placeholder="Выберите уровень способности"/>
+                                </div>
+                                <dx-button (onClick)="removeAbility(i)"
+                                           text="Удалить"
+                                           icon="trash"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="component">
+                <div class="button-wrapper">
+                    <dx-button (onClick)="addAbilities()"
+                               text="Добавить способность"
+                               icon="plus"
+                               type="default"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</dx-popup>

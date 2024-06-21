@@ -1,0 +1,9 @@
+@import "src/assets/styles/theming";
+:host {
+    @include flexWrapper(column, center);
+
+    app-nav-bar {
+        @include flexWrapper(column, center, center);
+    }
+}
+

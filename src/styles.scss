@@ -1,0 +1,9 @@
+@import "src/assets/styles/theming";
+
+body {
+    @include flexWrapper(row, center);
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: clamp(0.375rem, 0.1317rem + 0.7784vw, 2rem);
+}

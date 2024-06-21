@@ -1,0 +1,45 @@
+@import "src/assets/styles/theming";
+.component-wrapper {
+    @include flexWrapper(row,space-around, normal);
+    width: 100%;
+    height: 100%;
+
+    .form-wrapper {
+        @include flexWrapper(column, space-between, normal);
+        width: 20vw;
+        height: 100%;
+
+        .add-skills-wrapper {
+            @include flexWrapper(column, space-around, normal);
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        .component {
+            width: 100%;
+
+            .inner-component {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            .title {
+                margin-bottom: 5px;
+            }
+
+            .wrapper {
+                background-color: rgba(199, 236, 255, 0.24);
+                margin-bottom: 15px;
+                padding: 5px;
+            }
+
+            .button-wrapper {
+                width: 100%;
+
+                dx-button {
+                    width: 20vw;
+                }
+            }
+        }
+    }
+}
+

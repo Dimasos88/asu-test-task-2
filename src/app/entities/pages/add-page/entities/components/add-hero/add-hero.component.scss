@@ -1,0 +1,69 @@
+@import "src/assets/styles/theming";
+:host {
+
+    .component-wrapper {
+        @include flexWrapper(column, space-around);
+        height: 100%;
+        width: 40vw;
+
+        .skill-components {
+            @include flexWrapper(row, normal);
+            width: 100%;
+
+            .component {
+                @include flexWrapper(row, normal);
+                width: 57%;
+
+                .title {
+                    margin-top: 10px;
+                }
+
+                .inline-title {
+                    margin: 10px 5px 0 15px;
+                }
+
+                .inner-component {
+                    @include flexWrapper(row, normal);
+
+                    dx-select-box {
+                        margin: 0 0.5vh 0 5vw;
+                    }
+                }
+            }
+
+            .inline-component {
+                @include flexWrapper(row, normal);
+                width: 43%;
+            }
+        }
+
+        .component {
+            @include flexWrapper(row, normal);
+            width: 100%;
+            max-height: 6vh;
+
+            .button-wrapper {
+                @include flexWrapper(row, flex-end);
+                width: 100%;
+
+                .dx-button {
+                    width: 70%;
+                }
+            }
+
+            .title {
+                width: 30%;
+                margin-top: 10px;
+            }
+
+            .inner-component {
+                @include flexWrapper(row, flex-end);
+                width: 70%;
+
+                dx-text-box, dx-number-box {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

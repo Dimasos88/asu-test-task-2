@@ -1,0 +1,53 @@
+<div [formGroup]="addSkillFormGroup"
+     class="component-wrapper">
+    <div class="component">
+        <div class="title">
+            Выбор героя:
+        </div>
+        <div class="inner-component">
+            <dx-select-box [formControlName]="LInquiryHero.ID"
+                           [searchEnabled]="true"
+                           [dataSource]="heroesData$ | async"
+                           [valueExpr]="LInquiryHero.ID"
+                           [displayExpr]="LInquiryHero.NAME"
+                           placeholder="Выберите вашего героя"/>
+        </div>
+    </div>
+    <div class="component">
+        <div class="title">
+            Добавление способностей
+        </div>
+        <div class="inner-component">
+            <dx-select-box [formControlName]="LAddHero.ABILITY_ID"
+                           [isValid]="addSkillFormGroup.get(LAddHero.ABILITY_ID)!.untouched ||
+                                      addSkillFormGroup.get(LAddHero.ABILITY_ID)!.valid"
+                           [dataSource]="heroSkillData"
+                           [searchEnabled]="true"
+                           [valueExpr]="LAddHeroSkill.ID"
+                           [displayExpr]="LItem.NAME"
+                           placeholder="Выберите новую способность"/>
+        </div>
+    </div>
+    <div class="component">
+        <div class="title">
+            Уровень способности
+        </div>
+        <div class="inner-component">
+            <dx-number-box [formControlName]="LAddHero.ABILITY_LEVEL"
+                           [isValid]="addSkillFormGroup.get(LAddHero.ABILITY_LEVEL)!.untouched ||
+                                      addSkillFormGroup.get(LAddHero.ABILITY_LEVEL)!.valid"
+                           [min]="1"
+                           [step]="1"
+                           [showSpinButtons]="true"
+                           placeholder="Введите уровень способности"/>
+        </div>
+    </div>
+    <div class="component">
+        <div class="button-wrapper">
+            <dx-button [disabled]="!addSkillFormGroup.valid"
+                       (onClick)="addNewSkill()"
+                       text="Добавить способность"
+                       type="default"/>
+        </div>
+    </div>
+</div>
